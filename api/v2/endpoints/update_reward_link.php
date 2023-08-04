@@ -13,7 +13,7 @@ if(isset($_POST['id'])){
     $type = isset($_POST['type']) ? Secure($_POST['type']) : '';
     $android_collect = isset($_POST['android_collect']) ? Secure($_POST['android_collect']) : 0;
     
-    if(!empty($title) || !empty($link) || !empty($is_redeem) || !empty($type) || !empty($android_collect))
+    if(!empty($title) || !empty($link) || !empty($type) || !empty($android_collect))
     {
         $data = getRewardLinks($_POST['id']);
         $query = "UPDATE ". T_REWARD_LINKS ." SET ";
@@ -26,7 +26,7 @@ if(isset($_POST['id'])){
             if (!empty($link)) {
                 $updateValues[] = "link = '$link'";
             }
-            if(!empty($is_redeem)){
+            if($is_redeem == 0 || $is_redeem == 1){
                 $updateValues[] = "is_redeem = '$is_redeem'";
             }
             if(!empty($type)){

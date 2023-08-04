@@ -43,6 +43,7 @@ function getRewardLinks($id = 0) {
     if(!empty($id)){
         $query_one .= " WHERE id = ".$id;
     }
+    $query_one .= " ORDER BY id DESC";
     $sql = mysqli_query($sqlConnect, $query_one);
     if (mysqli_num_rows($sql)) {
         while ($row = mysqli_fetch_assoc($sql)) {
