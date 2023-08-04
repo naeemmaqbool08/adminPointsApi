@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^api(/?|)$ api-v2.php [NC,QSA]
+RewriteRule ^api/([^\/]+)(\/|)$ api-v2.php?type=$1 [NC,QSA]
