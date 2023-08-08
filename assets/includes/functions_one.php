@@ -36,12 +36,15 @@ function UserData($user_id, $password = true) {
     return $fetched_data;
 }
 
-function getRewardLinks($id = 0) {
+function getRewardLinks($id = 0,$slug='') {
     global $wo, $sqlConnect, $cache, $db;
     $data           = array();
     $query_one      = "SELECT * FROM " . T_REWARD_LINKS;
     if(!empty($id)){
         $query_one .= " WHERE id = ".$id;
+    }
+    if(!empty($slug)){
+        $query_one .= " WHERE slug = '".$slug."'";
     }
     $query_one .= " ORDER BY id DESC";
     $sql = mysqli_query($sqlConnect, $query_one);
@@ -52,10 +55,13 @@ function getRewardLinks($id = 0) {
     }
     return $data;
 }
-function sendFirebaseNotifications($title,$body) {
+function sendFirebaseNotifications($title,$body,$slug) {
     global $wo, $sqlConnect, $cache, $db;
+    if(empty($slug)){
+        return false;
+    }
     $fcm_tokens           = array();
-    $query_one      = "SELECT * FROM " . T_FCM_TOKENS;
+    $query_one      = "SELECT * FROM " . T_FCM_TOKENS." WHERE slug = '$slug'";
     $sql = mysqli_query($sqlConnect, $query_one);
     if (mysqli_num_rows($sql)) {
         while ($row = mysqli_fetch_assoc($sql)) {

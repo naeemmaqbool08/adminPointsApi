@@ -5,15 +5,16 @@ $response_data   = array(
     'message' => 'Oops! Something went wrong. Please try again later',
 );
 
-if(isset($_POST['title']) || isset($_POST['link'])){
-    $title = $_POST['title'];
-    $link = $_POST['link'];
+if(isset($_POST['title']) || isset($_POST['link']) || isset($_POST['slug'])){
+    $title = Secure($_POST['title']);
+    $link = Secure($_POST['link']);
+    $slug = Secure($_POST['slug']);
     $is_redeem = isset($_POST['is_redeem']) ? $_POST['is_redeem'] : 0;
     $type = isset($_POST['type']) ? $_POST['type'] : '';
 
-    $sql = "INSERT INTO " .T_REWARD_LINKS. " (`title`, `link`, `is_redeem`, `type`) VALUES ('$title', '$link','$is_redeem', '$type')";
+    $sql = "INSERT INTO " .T_REWARD_LINKS. " (`slug`,`title`, `link`, `is_redeem`, `type`) VALUES ('$slug','$title', '$link','$is_redeem', '$type')";
     if (mysqli_query($sqlConnect, $sql)) {
-        $notification_response = sendFirebaseNotifications($_POST['notification_title'],$_POST['notification_body']);
+        $notification_response = sendFirebaseNotifications($_POST['notification_title'],$_POST['notification_body'],$slug);
         $response_data   = array(
             'api_status' => 200,
             'message' => 'Data saved successfully',

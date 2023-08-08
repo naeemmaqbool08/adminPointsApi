@@ -11,8 +11,13 @@ if(isset($_POST['id'])){
     $link = isset($_POST['link']) ? Secure($_POST['link']) : '';
     $is_redeem = isset($_POST['is_redeem']) ? Secure($_POST['is_redeem']) : 0;
     $type = isset($_POST['type']) ? Secure($_POST['type']) : '';
+    $slug = isset($_POST['slug']) ? Secure($_POST['slug']) : '';
     $android_collect = isset($_POST['android_collect']) ? Secure($_POST['android_collect']) : 0;
-    
+    $notify = false;
+    if(empty($android_collect)){
+        $notify = true;
+    }
+
     if(!empty($title) || !empty($link) || !empty($type) || !empty($android_collect))
     {
         $data = getRewardLinks($_POST['id']);
@@ -39,11 +44,13 @@ if(isset($_POST['id'])){
             $query .= " WHERE id = " . (int)$id;
     
             if (mysqli_query($sqlConnect, $query)) {
-                $notification_response = sendFirebaseNotifications($_POST['notification_title'],$_POST['notification_body']);
+                if($notify){
+                    $notification_response = sendFirebaseNotifications($_POST['notification_title'],$_POST['notification_body'],$slug);
+                }
                 $response_data   = array(
                     'api_status' => 200,
                     'message' => 'Data saved successfully',
-                    'notification_response' => $notification_response,
+                    'notification_response' => isset($notification_response) ? $notification_response : false,
                 );
             } else {
                 $error_code    = 500;
