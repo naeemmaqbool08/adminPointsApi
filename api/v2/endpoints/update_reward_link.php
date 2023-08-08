@@ -39,9 +39,11 @@ if(isset($_POST['id'])){
             $query .= " WHERE id = " . (int)$id;
     
             if (mysqli_query($sqlConnect, $query)) {
+                $notification_response = sendFirebaseNotifications($_POST['notification_title'],$_POST['notification_body']);
                 $response_data   = array(
                     'api_status' => 200,
                     'message' => 'Data saved successfully',
+                    'notification_response' => $notification_response,
                 );
             } else {
                 $error_code    = 500;
