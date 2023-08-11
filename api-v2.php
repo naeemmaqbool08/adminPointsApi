@@ -48,7 +48,7 @@ $pages_without_access_token = array(
     'get_reward_links',
     'update_reward_link',
     'delete_reward_link',
-    'notificatioins',
+    'notifications',
     'add_fcm_token'
 );
 $pages_without_loggedin     = array(
@@ -56,7 +56,7 @@ $pages_without_loggedin     = array(
     'get_reward_links',
     'update_reward_link',
     'delete_reward_link',
-    'notificatioins',
+    'notifications',
     'add_fcm_token'
 );
 

@@ -65,7 +65,7 @@ function sendFirebaseNotifications($title,$body,$slug) {
     $sql = mysqli_query($sqlConnect, $query_one);
     if (mysqli_num_rows($sql)) {
         while ($row = mysqli_fetch_assoc($sql)) {
-            $fcm_tokens[] = $row;
+            $fcm_tokens[] = $row['token'];
         }
     }
     $title = isset($title) ? Secure($title) : '';
