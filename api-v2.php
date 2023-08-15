@@ -49,7 +49,9 @@ $pages_without_access_token = array(
     'update_reward_link',
     'delete_reward_link',
     'notifications',
-    'add_fcm_token'
+    'add_fcm_token',
+    'add_link',
+    'get_links',
 );
 $pages_without_loggedin     = array(
     'add_reward_link',
@@ -57,7 +59,9 @@ $pages_without_loggedin     = array(
     'update_reward_link',
     'delete_reward_link',
     'notifications',
-    'add_fcm_token'
+    'add_fcm_token',
+    'add_link',
+    'get_links',
 );
 
 if (!file_exists($api)) {

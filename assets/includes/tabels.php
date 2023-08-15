@@ -4,5 +4,6 @@ define('FCM_SERVER_KEY', 'AAAA8lCM1J8:APA91bH2k5EvT5lkpRCysTPtZk-D-6kN-znopA4bEf
 define('T_USERS', 'users');
 define('T_REWARD_LINKS', 'reward_link');
 define('T_FCM_TOKENS', 'fcm_tokens');
+define('T_LINKS', 'links');
 
 ?>
